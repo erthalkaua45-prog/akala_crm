@@ -11,7 +11,7 @@ const Login: React.FC = () => {
     const handleLogin = (e: React.FormEvent) => {
         e.preventDefault();
         // Hardcoded auth for prototype
-        if (email === 'admin@antigravity.com' && password === 'admin123') {
+        if (email === 'sara@akala' && password === 'akala_admin') {
             localStorage.setItem('token', 'mock-token');
             navigate('/dashboard');
         } else {
