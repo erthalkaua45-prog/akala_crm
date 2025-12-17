@@ -37,7 +37,8 @@ const Customers: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   
-  const CUSTOMERS_API_URL = '/api/customers';
+  const BASE_API_URL = import.meta.env.VITE_APP_API_URL || '';
+  const CUSTOMERS_API_URL = `${BASE_API_URL}/api/customers`;
   
   const fetchCustomers = useCallback(async () => {
     setIsLoading(true); // Inicia o loading
