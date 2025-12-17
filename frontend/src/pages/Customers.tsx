@@ -37,7 +37,7 @@ const Customers: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   
-  const CUSTOMERS_API_URL = 'https://apps-akala-backend.ptiotg.easypanel.host/api/customers';
+  const CUSTOMERS_API_URL = '/api/customers';
   
   const fetchCustomers = useCallback(async () => {
     setIsLoading(true); // Inicia o loading
