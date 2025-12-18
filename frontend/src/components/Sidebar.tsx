@@ -6,6 +6,7 @@ import ListAltIcon from '@mui/icons-material/ListAlt';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import akalaLogo from '../assets/sara.png';
 
 interface SidebarProps {
     open: boolean;
@@ -44,9 +45,9 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onToggle }) => {
             <Box sx={{ p: 2, display: 'flex', alignItems: 'center', justifyContent: open ? 'space-between' : 'center' }}>
                 {open && (
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                        <Avatar sx={{ bgcolor: 'primary.main' }}>A</Avatar>
+                        <Avatar sx={{ bgcolor: 'primary.main' }} src={akalaLogo}>A</Avatar>
                         <Typography variant="h6" noWrap>
-                            Antigravity
+                            Sara - Admin
                         </Typography>
                     </Box>
                 )}
