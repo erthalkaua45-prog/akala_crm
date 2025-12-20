@@ -81,18 +81,22 @@ const CustomerPopup: React.FC<CustomerPopupProps> = ({ open, onClose, customer }
                                 <Typography variant="caption" color="text.secondary">Cliente Desde</Typography>
                                 <Typography variant="h6">{new Date(customer.customer_since).toLocaleDateString()}</Typography>
                             </Box>
-                            <Box>
+                            {customer.last_order_date && <Box>
                                 <Typography variant="caption" color="text.secondary">Último Pedido</Typography>
                                 <Typography variant="h6">{new Date(customer.last_order_date).toLocaleDateString()}</Typography>
-                            </Box>
+                            </Box>}
+                            {customer.last_visit_date && <Box>
+                                <Typography variant="caption" color="text.secondary">Última Visita</Typography>
+                                <Typography variant="h6">{new Date(customer.last_visit_date).toLocaleDateString()}</Typography>
+                            </Box>}
                         </Box>
 
                         <Box sx={{ mt: 3 }}>
                             <Typography variant="caption" color="text.secondary">Avaliação</Typography>
-                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                            {customer.evaluation && <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                                 <StarIcon color="warning" />
-                                <Typography variant="h6">{customer.evaluation?.score || '-'}/5</Typography>
-                            </Box>
+                                <Typography variant="h6">{customer.evaluation?.score}/5</Typography>
+                            </Box>}
                             <Typography variant="body2" color="text.secondary" sx={{ fontStyle: 'italic' }}>
                                 "{customer.evaluation?.comment || 'Sem avaliação'}"
                             </Typography>
