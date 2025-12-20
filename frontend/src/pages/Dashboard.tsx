@@ -32,8 +32,6 @@ const Dashboard: React.FC = () => {
 
         const now = new Date();
         const sevenDaysAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
-        const thisMonth = now.getMonth();
-        const thisYear = now.getFullYear();
 
         let totalConsumption = 0;
         let newCustomersCount = 0;
