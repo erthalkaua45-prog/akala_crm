@@ -1,81 +1,13 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState } from 'react';
 import { Box, Typography, Paper, Chip } from '@mui/material';
 import { DataGrid, type GridColDef, type GridRenderCellParams } from '@mui/x-data-grid';
 import CustomerPopup from '../components/CustomerPopup';
-
-interface CustomerEvaluation {
-  score: number;
-  comment: string;
-}
-
-
-interface Customer {
-  _id: string;
-  name: string;
-  email: string;
-  whatsapp: string;
-  status: boolean;
-  tags: string[];
-  total_orders: number;
-  total_visits: number;
-  average_ticket: number;
-  last_order_date: { $date: string };
-  evaluation: CustomerEvaluation;
-  male: boolean;
-  origin: string;
-  lead_score: number;
-  customer_since: { $date: string };
-  created_at: { $date: string };
-  insight?: string;
-  last_insight_date?: Date;
-  
-  __v: number;
-}
+import { useCustomers } from '../components/CustomerContext';
 
 const Customers: React.FC = () => {
-  const [customers, setCustomers] = useState<any[]>([]);
   const [selectedCustomer, setSelectedCustomer] = useState<any>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
-  
-  const BASE_API_URL = import.meta.env.VITE_APP_API_URL || '';
-  const CUSTOMERS_API_URL = `${BASE_API_URL}/api/customers`;
-  
-  const fetchCustomers = useCallback(async () => {
-    setIsLoading(true); // Inicia o loading
-    setError(null);
-    try {
-      // 1. Otimização: Evitar chamadas desnecessárias se os dados já estiverem lá
-      // (aqui não se aplica ao primeiro load, mas é bom para refetches)
-      
-      const response = await fetch(CUSTOMERS_API_URL);
-      
-      // Checagem de erro HTTP (ex: 404, 500)
-      if (!response.ok) {
-        throw new Error(`Erro ao buscar dados: ${response.statusText}`);
-      }
-      
-      const data: Customer[] = await response.json();
-      
-      // 2. Performance: Adicionar uma pequena otimização aqui se necessário, 
-      // como ordenar os dados antes de salvar no estado
-      // Ex: data.sort((a, b) => b.total_orders - a.total_orders);
-      
-      setCustomers(data);
-
-    } catch (err) {
-      console.error("Falha ao carregar clientes:", err);
-      // Tratamento de erro robusto para a interface
-      setError('Não foi possível carregar os clientes. Tente novamente mais tarde.'); 
-      setCustomers([]); // Limpa dados antigos em caso de falha
-    } finally {
-      setIsLoading(false); // Finaliza o loading
-    }
-  }, []); // Sem dependências, executa apenas no mount
-  useEffect(() => {
-    fetchCustomers();
-  }, [fetchCustomers]);
-
+  const { customers, loading, error } = useCustomers();
+    
   const columns: GridColDef[] = [
     { field: 'name', headerName: 'Nome', width: 200 },
     { field: 'email', headerName: 'Email', width: 200 },
@@ -113,7 +45,7 @@ const Customers: React.FC = () => {
     },
   ];
 
-  if (isLoading) {
+  if (loading) {
     return <div>Carregando clientes...</div>; // Renderização de loading rápido
   }
 

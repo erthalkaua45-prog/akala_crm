@@ -9,6 +9,7 @@ import Dashboard from './pages/Dashboard';
 import Customers from './pages/Customers';
 
 import Lists from './pages/Lists';
+import { CustomerProvider } from './components/CustomerContext';
 
 // Simple auth guard
 const PrivateRoute = ({ children }: { children: React.ReactNode }) => {
@@ -19,18 +20,20 @@ const PrivateRoute = ({ children }: { children: React.ReactNode }) => {
 function App() {
   return (
     <ThemeProvider theme={theme}>
+      <CustomerProvider>
+        <Router>
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/" element={<PrivateRoute><Layout /></PrivateRoute>}>
+              <Route index element={<Navigate to="/dashboard" replace />} />
+              <Route path="dashboard" element={<Dashboard />} />
+              <Route path="customers" element={<Customers />} />
+              <Route path="lists" element={<Lists customers={[]} />} />
+            </Route>
+          </Routes>
+        </Router>
+      </CustomerProvider>
       <CssBaseline />
-      <Router>
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/" element={<PrivateRoute><Layout /></PrivateRoute>}>
-            <Route index element={<Navigate to="/dashboard" replace />} />
-            <Route path="dashboard" element={<Dashboard />} />
-            <Route path="customers" element={<Customers />} />
-            <Route path="lists" element={<Lists />} />
-          </Route>
-        </Routes>
-      </Router>
     </ThemeProvider>
   );
 }
