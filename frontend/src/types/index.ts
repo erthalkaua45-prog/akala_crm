@@ -13,6 +13,7 @@ export interface Customer {
   total_orders: number;
   total_visits: number;
   average_ticket: number;
+  consumption: number;
   last_order_date: string;
   first_order_date: { $date: string };
   customer_since: { $date: string };
