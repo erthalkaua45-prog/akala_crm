@@ -47,14 +47,16 @@ const Dashboard: React.FC = () => {
         const parseMongoDate = (d: any) => d?.$date ? new Date(d.$date) : new Date(d);
 
         customers.forEach(c => {
-            const createdAt = parseMongoDate(c.customer_since);
+            const customerSince = parseMongoDate(c.customer_since);
             const consumption = c.consumption || 0;
 
             // Faturamento Total
             totalConsumption += consumption;
 
             // Novos Clientes (7 dias)
-            if (createdAt <= sevenDaysAgo) newCustomersCount++;
+            if (!isNaN(customerSince.getTime())) {
+                if (customerSince >= sevenDaysAgo) newCustomersCount++;
+}
 
             // Soma de Lead Score para média
             totalScore += (c.lead_score || 0);
