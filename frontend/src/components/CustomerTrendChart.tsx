@@ -31,7 +31,7 @@ export function CustomerTrendChart({ data }: { data: any[] }) {
       <FormControl size="small" sx={{ minWidth: 150 }}>
         <InputLabel>Período</InputLabel>
         <Select value={timeRange} label="Período" onChange={(e) => setTimeRange(e.target.value)}>
-          <MenuItem value="30d">7 dias</MenuItem>
+          <MenuItem value="7d">7 dias</MenuItem>
           <MenuItem value="30d">30 dias</MenuItem>
           <MenuItem value="90d">3 meses</MenuItem>
           <MenuItem value="365d">1 ano</MenuItem>
