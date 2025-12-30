@@ -65,13 +65,13 @@ const Lists: React.FC<ListsProps> = () => {
     }, [customers]);
 
     return (
-        <Box sx={{ p: 1 }}>
+        <Box sx={{ p: 1, width: '100%', maxWidth:'none'}}>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 4 }}>
                 <Typography variant="h4" sx={{ fontWeight: 'bold' }}>Listas de Segmentação</Typography>
                 <Button variant="contained" startIcon={<AddIcon />}>Nova Lista</Button>
             </Box>
 
-            <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr', lg: 'repeat(3, 1fr)' }, gap: 3 }}>
+            <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr', lg: 'repeat(5, 1fr)' }, gap: 3, width: '100%', minWidth: '100%',}}>
                 {segments.map((list) => (
                     <Paper key={list.id} sx={{ p: 3, borderRadius: 3, border: '1px solid', borderColor: 'divider', '&:hover': { boxShadow: 4 } }}>
                         <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}>

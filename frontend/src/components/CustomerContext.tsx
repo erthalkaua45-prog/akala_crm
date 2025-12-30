@@ -19,11 +19,13 @@ export const CustomerProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     const refreshData = async () => {
         setLoading(true);
         try {
+            console.log('entrei na funçao')
             const token = localStorage.getItem('token');
             const response = await axios.get('https://apps-akala-backend.ptiotg.easypanel.host/api/customers', {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setCustomers(response.data);
+            console.log('entrei na agora', response.data)
         } catch (error) {
             setError(true);
             console.error("Erro ao carregar clientes", error);
